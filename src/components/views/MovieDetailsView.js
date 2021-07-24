@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Cast from '../Cast/Cast';
+import Reviews from '../Reviews/Reviews';
 
 import { fetchMovieById } from '../../services/api';
 
@@ -47,7 +48,9 @@ export default function MovieDetailsView() {
             <Route path="/movies/:movieId/cast">
               <Cast />
             </Route>
-            <Route path="/movies/:movieId/reviews"></Route>
+            <Route path="/movies/:movieId/reviews">
+              <Reviews />
+            </Route>
           </Switch>
         </div>
       )}

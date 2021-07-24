@@ -41,18 +41,31 @@ export const fetchMovieById = async id => {
 
 export const fetchCastById = async id => {
   try {
-    const movieDetails = await axios
+    const getCast = await axios
       .get(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=87547ad0a5cfee0fba05460a073a9eb9`,
       )
       .then(res => res.data)
       .then(data => data.cast);
-    return movieDetails;
+    return getCast;
   } catch (error) {
     console.error(error);
   }
 };
 
+export const fetchReviewById = async id => {
+  try {
+    const getMovieReviews = await axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=87547ad0a5cfee0fba05460a073a9eb9`,
+      )
+      .then(res => res.data)
+      .then(data => data.results);
+    return getMovieReviews;
+  } catch (error) {
+    console.error(error);
+  }
+};
 // const fetchReviewById = async id => {
 //   const { data } = await axios.get(
 //     `movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 // import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
 import { fetchCastById } from '../../services/api';
+
 export default function Cast() {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
@@ -13,7 +13,6 @@ export default function Cast() {
 
   return (
     <div>
-      <h1>Cast{movieId}</h1>
       {actors && (
         <ul>
           {actors.map(actor => (
