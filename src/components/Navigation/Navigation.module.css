@@ -1,0 +1,12 @@
+.NavLink {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+.activeLink {
+  composes: NavLink;
+  color: rgb(9, 9, 238);
+}
