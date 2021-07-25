@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AppBar from '../AppBar/AppBar';
 import HomeView from '../views/HomeView';
-import Movies from '../views/Movies';
+import MoviesPage from '../MoviesPage/MoviesPage';
 import NotFoundView from '../views/NotFoundView';
 import MovieDetailsView from '../views/MovieDetailsView';
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
         </Route>
 
         <Route path="/movies" exact>
-          <Movies />
+          <MoviesPage />
         </Route>
 
         <Route path="/movies/:movieId">

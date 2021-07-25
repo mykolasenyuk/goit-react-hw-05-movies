@@ -8,7 +8,7 @@ export default function Cast() {
   const [actors, setActors] = useState([]);
   useEffect(() => {
     fetchCastById(movieId).then(cast => setActors(cast));
-    console.log(fetchCastById(movieId));
+    // console.log(fetchCastById(movieId));
   }, [movieId]);
 
   return (

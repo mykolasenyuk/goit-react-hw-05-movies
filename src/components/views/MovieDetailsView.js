@@ -3,7 +3,7 @@ import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Cast from '../Cast/Cast';
 import Reviews from '../Reviews/Reviews';
-
+import { useHistory } from 'react-router-dom';
 import { fetchMovieById } from '../../services/api';
 
 export default function MovieDetailsView() {
@@ -13,17 +13,27 @@ export default function MovieDetailsView() {
   //   console.log(match);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetchMovieById(movieId).then(movie => setMovie(movie));
     // console.log(fetchMovieById(movieId));
   }, [movieId]);
 
+  // console.log(location);
+  // const sortOrder = new URLSearchParams(location.search).get('/movies') ?? '/';
+  // console.log(sortOrder);
+  const onBackBtn = () => {
+    history.goBack();
+  };
+
   return (
     <>
       {movie && (
         <div>
-          <button type="button">Go back</button>
+          <button type="button" onClick={onBackBtn}>
+            Go back
+          </button>
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.original_title}
@@ -39,10 +49,12 @@ export default function MovieDetailsView() {
             {movie.genres &&
               movie.genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
           </ul>
+          <hr />
           <div>
             <p>Additional information</p>
             <Link to={`${url}/cast`}>Cast</Link>
             <Link to={`${url}/reviews`}>Reviews</Link>
+            <hr />
           </div>
           <Switch>
             <Route path="/movies/:movieId/cast">
