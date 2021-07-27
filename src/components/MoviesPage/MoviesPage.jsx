@@ -3,15 +3,15 @@ import SearchBar from '../SearchBar/SearchBar';
 // import MoviesPage from './MoviesPage';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetchSearcingMovies } from '../../services/api';
-// import HomePage from '../views/HomeView';
-import { Link } from 'react-router-dom';
+import MoviesList from '../MoviesList/MoviesList';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const history = useHistory();
   const location = useLocation();
+  console.log('page', location);
   const searchQuery = new URLSearchParams(location.search).get('query');
-  console.log(searchQuery);
+  // console.log(searchQuery);
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -31,14 +31,7 @@ export default function MoviesPage() {
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
-      <ul>
-        {movies &&
-          movies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-            </li>
-          ))}
-      </ul>
+      <MoviesList movies={movies} />
     </>
   );
 }

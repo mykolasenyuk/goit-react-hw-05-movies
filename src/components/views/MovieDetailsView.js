@@ -1,10 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { useEffect, useState, lazy, Suspense } from 'react';
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
-import { useHistory } from 'react-router-dom';
+// import Cast from '../Cast/Cast';
+// import Reviews from '../Reviews/Reviews';
 import { fetchMovieById } from '../../services/api';
+
+const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast"*/));
+const Reviews = lazy(() =>
+  import('../Reviews/Reviews' /*webpackChunkName: "review"*/),
+);
 
 export default function MovieDetailsView() {
   const { url } = useRouteMatch();
@@ -14,17 +25,16 @@ export default function MovieDetailsView() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const history = useHistory();
+  const location = useLocation();
+  console.log('details', location);
 
   useEffect(() => {
     fetchMovieById(movieId).then(movie => setMovie(movie));
     // console.log(fetchMovieById(movieId));
   }, [movieId]);
 
-  // console.log(location);
-  // const sortOrder = new URLSearchParams(location.search).get('/movies') ?? '/';
-  // console.log(sortOrder);
   const onBackBtn = () => {
-    history.goBack();
+    history.push(location.state?.from ?? '/movies');
   };
 
   return (
@@ -56,14 +66,16 @@ export default function MovieDetailsView() {
             <Link to={`${url}/reviews`}>Reviews</Link>
             <hr />
           </div>
-          <Switch>
-            <Route path="/movies/:movieId/cast">
-              <Cast />
-            </Route>
-            <Route path="/movies/:movieId/reviews">
-              <Reviews />
-            </Route>
-          </Switch>
+          <Suspense fallback={<h1>loading////</h1>}>
+            <Switch>
+              <Route path="/movies/:movieId/cast">
+                <Cast />
+              </Route>
+              <Route path="/movies/:movieId/reviews">
+                <Reviews />
+              </Route>
+            </Switch>
+          </Suspense>
         </div>
       )}
     </>

@@ -1,25 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 import { fetchTrendingMovies } from '../../services/api';
-
+import MoviesList from '../MoviesList/MoviesList';
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     fetchTrendingMovies().then(movies => setMovies(movies));
   }, []);
+  const location = useLocation();
+  console.log('home', location);
 
-  return (
-    <>
-      <ul>
-        {movies &&
-          movies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-            </li>
-          ))}
-      </ul>
-    </>
-  );
+  return <MoviesList movies={movies} />;
 }
