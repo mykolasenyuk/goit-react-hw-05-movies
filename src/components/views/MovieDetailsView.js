@@ -8,9 +8,8 @@ import {
   useHistory,
 } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-// import Cast from '../Cast/Cast';
-// import Reviews from '../Reviews/Reviews';
 import { fetchMovieById } from '../../services/api';
+import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 
 const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast"*/));
 const Reviews = lazy(() =>
@@ -23,18 +22,34 @@ export default function MovieDetailsView() {
   //   const match = useRouteMatch();
   //   console.log(match);
   const [movie, setMovie] = useState(null);
+  const [urlLocation, setUrlLocation] = useState('');
   const { movieId } = useParams();
   const history = useHistory();
   const location = useLocation();
   console.log('details', location);
 
+  const locationParam = () => {
+    const path = location.state?.from.pathname;
+    const search = location.state?.from.search;
+    setUrlLocation({
+      path: path,
+      search: search,
+    });
+  };
+
+  // console.log('patn', location.state?.from.pathname);
+  // console.log('search', location.state?.from.search);
   useEffect(() => {
     fetchMovieById(movieId).then(movie => setMovie(movie));
     // console.log(fetchMovieById(movieId));
   }, [movieId]);
 
+  useEffect(() => {
+    locationParam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const onBackBtn = () => {
-    history.push(location.state?.from ?? '/movies');
+    history.push(`${urlLocation.path}${urlLocation.search}` ?? '/');
   };
 
   return (
@@ -66,7 +81,7 @@ export default function MovieDetailsView() {
             <Link to={`${url}/reviews`}>Reviews</Link>
             <hr />
           </div>
-          <Suspense fallback={<h1>loading////</h1>}>
+          <Suspense fallback={<LoaderSpiner />}>
             <Switch>
               <Route path="/movies/:movieId/cast">
                 <Cast />

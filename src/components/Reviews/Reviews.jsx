@@ -13,7 +13,7 @@ export default function Reviews() {
 
   return (
     <div>
-      {reviews && (
+      {!reviews ? (
         <ul>
           {reviews.map(review => (
             <li key={review.id}>
@@ -22,6 +22,8 @@ export default function Reviews() {
             </li>
           ))}
         </ul>
+      ) : (
+        <p>No reviews for this movie </p>
       )}
     </div>
   );

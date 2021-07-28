@@ -1,11 +1,8 @@
 import { lazy, Suspense } from 'react';
-
 import { Switch, Route } from 'react-router-dom';
 import AppBar from '../AppBar/AppBar';
-// import HomeView from '../views/HomeView';
 import MoviesPage from '../MoviesPage/MoviesPage';
-// import NotFoundView from '../views/NotFoundView';
-// import MovieDetailsView from '../views/MovieDetailsView';
+import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 
 const HomeView = lazy(() =>
   import('../views/HomeView' /*webpackChunkName: "home-view"*/),
@@ -23,7 +20,7 @@ export default function App() {
   return (
     <div>
       <AppBar />
-      <Suspense fallback={<h1>Loading....</h1>}>
+      <Suspense fallback={<LoaderSpiner />}>
         <Switch>
           <Route path="/" exact>
             <HomeView />
