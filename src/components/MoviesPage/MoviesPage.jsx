@@ -3,7 +3,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import { useHistory, useLocation } from 'react-router-dom';
 import { fetchSearcingMovies } from '../../services/api';
 import MoviesList from '../MoviesList/MoviesList';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 
@@ -17,17 +17,22 @@ export default function MoviesPage() {
 
   useEffect(() => {
     if (!searchQuery) return;
-    setStatus('pending');
-    fetchSearcingMovies(searchQuery).then(movies => {
-      if (movies === []) {
-        toast.error(`${searchQuery} not finded`);
-        setStatus('rejected');
-      } else {
-        toast.error(`${searchQuery}  finded`);
-        setMovies(movies);
-        setStatus('resolved');
-      }
-    });
+    (async () => {
+      setStatus('pending');
+      try {
+        await fetchSearcingMovies(searchQuery).then(movies => {
+          if (!movies.length) {
+            toast.error(`🥺 "${searchQuery}" not finded! Try again please. `);
+            setStatus('rejected');
+            throw new Error('No results found for this query');
+          } else {
+            toast.error(`${searchQuery}  finded`);
+            setMovies(movies);
+            setStatus('resolved');
+          }
+        });
+      } catch (error) {}
+    })();
   }, [searchQuery]);
 
   const handleSubmit = query => {
@@ -46,23 +51,16 @@ export default function MoviesPage() {
       return (
         <div>
           <SearchBar onSubmit={handleSubmit} />
-          <ToastContainer />
           <h1>Search your favorites movies here!</h1>
         </div>
       );
     case 'pending':
-      return (
-        <>
-          <SearchBar onSubmit={handleSubmit} />
-          <ToastContainer />
-        </>
-      );
+      return <SearchBar onSubmit={handleSubmit} />;
     case 'resolved':
       return (
         <>
           <SearchBar onSubmit={handleSubmit} />
           <MoviesList movies={movies} />
-          <ToastContainer />
           <h1>resolv!</h1>
         </>
       );
@@ -70,8 +68,6 @@ export default function MoviesPage() {
       return (
         <>
           <SearchBar onSubmit={handleSubmit} />
-          <ToastContainer />
-          <h1>Search here!</h1>
         </>
       );
 

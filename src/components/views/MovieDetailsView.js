@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState, lazy, Suspense, useRef } from 'react';
 import {
   Link,
   Switch,
@@ -18,9 +18,7 @@ const Reviews = lazy(() =>
 
 export default function MovieDetailsView() {
   const { url } = useRouteMatch();
-  //   console.log({ url });
-  //   const match = useRouteMatch();
-  //   console.log(match);
+
   const [movie, setMovie] = useState(null);
   const [urlLocation, setUrlLocation] = useState('');
   const { movieId } = useParams();
@@ -37,8 +35,9 @@ export default function MovieDetailsView() {
     });
   };
 
-  // console.log('patn', location.state?.from.pathname);
-  // console.log('search', location.state?.from.search);
+  console.log('ref', useRef(location.state?.from).current);
+  console.log('search', location.state?.from.search);
+  // const ref =useRef(location.state?.from).current
   useEffect(() => {
     fetchMovieById(movieId).then(movie => setMovie(movie));
     // console.log(fetchMovieById(movieId));

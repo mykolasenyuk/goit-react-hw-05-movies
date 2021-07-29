@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import s from './SearchBar.module.css';
 // import PropTypes from 'prop-types';
 
@@ -12,7 +12,7 @@ export default function SearchBar({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
     if (name.trim() === '') {
-      //   toast.warn('Enter valid name,please!');
+      toast.warn('Enter valid name,please!');
       return;
     }
     onSubmit(name);

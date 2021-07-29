@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import AppBar from '../AppBar/AppBar';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
-
+import { ToastContainer } from 'react-toastify';
+import Container from '../Container/Container';
 const HomeView = lazy(() =>
   import('../views/HomeView' /*webpackChunkName: "home-view"*/),
 );
@@ -18,7 +19,7 @@ const MovieDetailsView = lazy(() =>
 
 export default function App() {
   return (
-    <div>
+    <Container>
       <AppBar />
       <Suspense fallback={<LoaderSpiner />}>
         <Switch>
@@ -39,6 +40,7 @@ export default function App() {
           </Route>
         </Switch>
       </Suspense>
-    </div>
+      <ToastContainer />
+    </Container>
   );
 }
