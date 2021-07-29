@@ -21,12 +21,13 @@ export default function MoviesPage() {
       setStatus('pending');
       try {
         await fetchSearcingMovies(searchQuery).then(movies => {
+          console.log(movies);
           if (!movies.length) {
             toast.error(`🥺 "${searchQuery}" not finded! Try again please. `);
             setStatus('rejected');
             throw new Error('No results found for this query');
           } else {
-            toast.error(`${searchQuery}  finded`);
+            toast.success(` 🚀 "${searchQuery}"  finded`);
             setMovies(movies);
             setStatus('resolved');
           }
