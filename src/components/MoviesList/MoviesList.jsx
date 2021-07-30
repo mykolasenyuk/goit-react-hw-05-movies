@@ -19,10 +19,7 @@ export default function MoviesList({ movies }) {
                 className={s.galleryImage}
               ></img>
             </Link>
-            <h2 className={s.galleryTitle}>
-              {movie.title}
-              {/* ({movie.release_date.slice(0, 4)}) */}
-            </h2>
+            <h2 className={s.galleryTitle}>{movie.title}</h2>
           </li>
         ))}
     </ul>

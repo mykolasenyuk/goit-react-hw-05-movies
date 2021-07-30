@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchTrendingMovies } from '../../services/api';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import MoviesList from '../MoviesList/MoviesList';
 import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 import { toast } from 'react-toastify';
@@ -9,7 +10,13 @@ export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
 
+  const { isExact } = useRouteMatch();
+  const history = useHistory();
+
   useEffect(() => {
+    if (!isExact) {
+      history.push('/');
+    }
     (async () => {
       setStatus('pending');
       try {
@@ -25,7 +32,7 @@ export default function HomePage() {
         toast.error(`Error!`);
       }
     })();
-  }, []);
+  }, [history, isExact]);
 
   switch (status) {
     case 'idle':
@@ -42,7 +49,7 @@ export default function HomePage() {
     case 'rejected':
       return (
         <div>
-          <h1>Something goes wrong!Reload page please</h1>
+          <h1>Something goes wrong! Reload page please</h1>
         </div>
       );
 

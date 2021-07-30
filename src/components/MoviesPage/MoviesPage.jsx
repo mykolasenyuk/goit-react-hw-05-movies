@@ -12,7 +12,7 @@ export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
   const [status, setStatus] = useState('idle');
-  console.log('page', location);
+  // console.log('page', location);
   const searchQuery = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {

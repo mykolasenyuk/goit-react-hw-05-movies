@@ -8,12 +8,12 @@ import Container from '../Container/Container';
 const HomeView = lazy(() =>
   import('../views/HomeView' /*webpackChunkName: "home-view"*/),
 );
-const NotFoundView = lazy(() =>
-  import('../views/NotFoundView' /*webpackChunkName: "not-found-view"*/),
-);
+// const NotFoundView = lazy(() =>
+//   import('../views/NotFoundView' /*webpackChunkName: "not-found-view"*/),
+// );
 const MovieDetailsView = lazy(() =>
   import(
-    '../views/MovieDetailsView' /*webpackChunkName: "movie-details-view"*/
+    '../MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-details-view"*/
   ),
 );
 
@@ -36,7 +36,7 @@ export default function App() {
           </Route>
 
           <Route>
-            <NotFoundView />
+            <HomeView />
           </Route>
         </Switch>
       </Suspense>

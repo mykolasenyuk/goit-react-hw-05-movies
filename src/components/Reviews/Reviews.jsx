@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-// import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchReviewById } from '../../services/api';
+import s from './Reviews.module.css';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -12,18 +12,18 @@ export default function Reviews() {
   }, [movieId]);
 
   return (
-    <div>
-      {!reviews ? (
-        <ul>
+    <div className={s.container}>
+      {reviews.length > 0 ? (
+        <ul className={s.list}>
           {reviews.map(review => (
-            <li key={review.id}>
-              <h3>{review.author}</h3>
-              <p>{review.content}</p>
+            <li key={review.id} className={s.listItem}>
+              <h3 className={s.author}>{review.author}</h3>
+              <p className={s.description}>{review.content}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No reviews for this movie </p>
+        <p className={s.description}>No reviews for this movie </p>
       )}
     </div>
   );
