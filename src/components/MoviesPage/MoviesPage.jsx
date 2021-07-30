@@ -27,7 +27,6 @@ export default function MoviesPage() {
             setStatus('rejected');
             throw new Error('No results found for this query');
           } else {
-            toast.success(` 🚀 "${searchQuery}"  finded`);
             setMovies(movies);
             setStatus('resolved');
           }
@@ -62,7 +61,6 @@ export default function MoviesPage() {
         <>
           <SearchBar onSubmit={handleSubmit} />
           <MoviesList movies={movies} />
-          <h1>resolv!</h1>
         </>
       );
     case 'rejected':

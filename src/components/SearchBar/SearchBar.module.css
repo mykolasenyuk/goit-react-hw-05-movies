@@ -20,8 +20,9 @@
   width: 100%;
   max-width: 600px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
+  border: 2px solid seagreen;
 }
 
 .SearchFormButton {
@@ -33,6 +34,7 @@
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #768873;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;

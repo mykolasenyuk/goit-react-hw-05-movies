@@ -17,7 +17,11 @@ export default function Cast() {
           {actors.map(actor => (
             <li key={actor.id} className={s.listItem}>
               <img
-                src={`https://image.tmdb.org/t/p/w400${actor.profile_path}`}
+                src={
+                  actor.profile_path
+                    ? `https://image.tmdb.org/t/p/w400${actor.profile_path}`
+                    : `https://www.peakndt.com/wp-content/uploads/2017/02/No_picture_available.png`
+                }
                 alt={actor.name}
                 className={s.actorsPhoto}
               />

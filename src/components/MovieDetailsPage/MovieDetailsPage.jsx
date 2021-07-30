@@ -62,7 +62,11 @@ export default function MovieDetailsView() {
 
           <div className={s.movieContainer}>
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : `https://www.peakndt.com/wp-content/uploads/2017/02/No_picture_available.png`
+              }
               alt={movie.original_title}
               className={s.movieImage}
             />
