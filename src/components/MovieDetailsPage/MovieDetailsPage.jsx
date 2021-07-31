@@ -12,6 +12,7 @@ import { fetchMovieById } from '../../services/api';
 import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 import s from './MovieDetails.module.css';
 
+
 const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast"*/));
 const Reviews = lazy(() =>
   import('../Reviews/Reviews' /*webpackChunkName: "review"*/),
@@ -125,3 +126,5 @@ export default function MovieDetailsView() {
     </>
   );
 }
+
+

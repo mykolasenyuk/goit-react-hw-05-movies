@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-04-movies",
+  "name": "goit-react-hw-05-movies",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mykolasenyuk.github.io/goit-react-hw-04-movies",
+  "homepage": "https://mykolasenyuk.github.io/goit-react-hw-05-movies",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

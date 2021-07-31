@@ -5,7 +5,7 @@ import { fetchSearcingMovies } from '../../services/api';
 import MoviesList from '../MoviesList/MoviesList';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
+import PropTypes from 'prop-types';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -74,3 +74,7 @@ export default function MoviesPage() {
       return;
   }
 }
+
+MoviesPage.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
