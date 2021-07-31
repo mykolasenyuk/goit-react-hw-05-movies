@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense, useRef } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import {
   NavLink,
   Switch,
@@ -25,7 +25,7 @@ export default function MovieDetailsView() {
   const { movieId } = useParams();
   const history = useHistory();
   const location = useLocation();
-  console.log('details', location);
+  //   console.log('details', location);
 
   const locationParam = () => {
     const path = location.state?.from.pathname;
@@ -36,8 +36,8 @@ export default function MovieDetailsView() {
     });
   };
 
-  console.log('ref', useRef(location.state?.from).current);
-  console.log('search', location.state?.from.search);
+  //   console.log('ref', useRef(location.state?.from).current);
+  //   console.log('search', location.state?.from.search);
   // const ref =useRef(location.state?.from).current
   useEffect(() => {
     fetchMovieById(movieId).then(movie => setMovie(movie));
