@@ -1,19 +1,19 @@
 import { lazy, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import AppBar from '../AppBar/AppBar';
-import MoviesPage from '../MoviesPage/MoviesPage';
+import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 import LoaderSpiner from '../LoaderSpiner/LoaderSpiner';
 import { ToastContainer } from 'react-toastify';
 import Container from '../Container/Container';
 const HomeView = lazy(() =>
-  import('../views/HomeView' /*webpackChunkName: "home-view"*/),
+  import('../../pages/HomePage/HomePage' /*webpackChunkName: "home-view"*/),
 );
 // const NotFoundView = lazy(() =>
 //   import('../views/NotFoundView' /*webpackChunkName: "not-found-view"*/),
 // );
 const MovieDetailsView = lazy(() =>
   import(
-    '../MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-details-view"*/
+    '../../pages/MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-details-view"*/
   ),
 );
 
@@ -34,10 +34,7 @@ export default function App() {
           <Route path="/movies/:movieId">
             <MovieDetailsView />
           </Route>
-
-          <Route>
-            <HomeView />
-          </Route>
+          <Redirect to="/" />
         </Switch>
       </Suspense>
       <ToastContainer />

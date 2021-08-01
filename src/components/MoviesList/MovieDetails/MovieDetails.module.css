@@ -86,31 +86,3 @@
   border-radius: 10px;
   border: 2px solid #ffffff;
 }
-.additionalInfCont {
-  margin-left: 50px;
-  margin-bottom: 20px;
-}
-.navLink {
-  border: 1px solid #000000;
-  padding: 5px;
-  margin-left: 10px;
-  background: #ffffff;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 18px;
-  color: #000000;
-  text-decoration: none;
-}
-.navLink:hover {
-  background: #2f8b57;
-  color: #ffffff;
-  border-color: #ffffff;
-}
-.navLinkactive {
-  background: #2f8b57;
-  color: #ffffff;
-  border-color: #ffffff;
-  text-decoration: none;
-  text-decoration: underline;
-}
